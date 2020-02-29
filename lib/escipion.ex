@@ -1,18 +1,19 @@
-defmodule Escipion do
-  @moduledoc """
-  Documentation for Escipion.
-  """
+defmodule Escipion.Application do
+  use Application
 
-  @doc """
-  Hello world.
+  def start(_type, _args),
+    do: Supervisor.start_link(children(), opts())
 
-  ## Examples
+  defp children do
+    [
+      Escipion.Telegram.Server.Http
+    ]
+  end
 
-      iex> Escipion.hello()
-      :world
-
-  """
-  def hello do
-    :world
+  defp opts do
+    [
+      strategy: :one_for_one,
+      name: Escipion.Supervisor
+    ]
   end
 end
