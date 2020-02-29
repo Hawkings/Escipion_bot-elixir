@@ -7,7 +7,7 @@ defmodule Escipion.MixProject do
       version: "0.1.0",
       elixir: "~> 1.9",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
     ]
   end
 
@@ -15,7 +15,8 @@ defmodule Escipion.MixProject do
   def application do
     [
       extra_applications: [:logger],
-      mod: {Escipion.Application, []}
+      mod: {Escipion.Application, []},
+      applications: [:httpoison],
     ]
   end
 
@@ -25,7 +26,9 @@ defmodule Escipion.MixProject do
       {:poison, "~> 3.1"},
       {:plug, "~> 1.9"},
       {:cowboy, "~> 2.7"},
-      {:plug_cowboy, "~> 2.0"}
+      {:plug_cowboy, "~> 2.0"},
+      {:httpoison, "~> 1.6"},
+      {:logger_file_backend, "~> 0.0.11"}
     ]
   end
 end
