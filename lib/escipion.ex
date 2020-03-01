@@ -8,7 +8,8 @@ defmodule Escipion.Application do
 
   defp children do
     [
-      Escipion.Telegram.Server.Http
+      Escipion.Telegram.Server.Http,
+      Escipion.Telegram.Client.PollingAgent,
     ]
   end
 

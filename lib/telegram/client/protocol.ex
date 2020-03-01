@@ -1,4 +1,4 @@
-defmodule Escipion.Telegram.Client do
+defmodule Escipion.Telegram.Client.Protocol do
   require Logger
 
   @api_base "https://api.telegram.org"
@@ -30,13 +30,19 @@ defmodule Escipion.Telegram.Client do
     )
   end
 
-  @spec get_updates() :: any
-  def get_updates() do
+  @spec get_updates(integer) :: any
+  def get_updates(offset \\ 0) do
+    body = %{
+      offset: offset,
+      timeout: 45
+    }
+
     response = HTTPoison.post!(
       "#{@api_base}/bot#{bot_key()}/getUpdates",
-      ""
+      Poison.encode!(body),
+      [{"Content-Type", "application/json"}],
+      [recv_timeout: 50_000]
     )
-    Logger.info(response.body)
-    response.body
+    Poison.decode!(response.body, %{keys: :atoms})
   end
 end
