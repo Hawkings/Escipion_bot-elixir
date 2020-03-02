@@ -1,5 +1,6 @@
 defmodule Escipion.Telegram.Client.PollingAgent do
   use Agent
+  alias Escipion.Telegram
 
   def child_spec([]) do
     interval = Application.get_env(:escipion_bot, :polling_interval)
@@ -32,11 +33,11 @@ defmodule Escipion.Telegram.Client.PollingAgent do
 
         _ ->
           new_offset =
-            Escipion.Telegram.Client.Protocol.get_updates(offset)
-            |> Escipion.Telegram.UpdateProcessor.process_updates()
+            Telegram.Client.Protocol.get_updates(offset)
+            |> Telegram.UpdateProcessor.process_updates()
 
           t2 = DateTime.utc_now() |> DateTime.to_unix(:millisecond)
-          delta = max(0, time - (t2-t1))
+          delta = max(0, time - (t2 - t1))
           :timer.sleep(delta)
           new_offset && (new_offset + 1) || offset
       end
