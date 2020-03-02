@@ -1,4 +1,4 @@
-# Escipión bot
+# Escipión bot [![Build Status](https://travis-ci.org/Hawkings/Escipion_bot.svg?branch=master)](https://travis-ci.org/Hawkings/Escipion_bot)
 
 Escipión is a Telegram bot that aims to spice up group chats with games and other features.
 
