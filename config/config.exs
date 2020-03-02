@@ -9,5 +9,4 @@ config :logger, :output_file,
 config :escipion_bot,
   polling_interval: 3_000
 
-# import_config "#{Mix.env()}.exs"
-import_config "telegram.secret.exs"
+import_config "#{Mix.env()}.exs"
