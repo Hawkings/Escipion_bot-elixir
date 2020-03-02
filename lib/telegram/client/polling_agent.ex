@@ -36,9 +36,9 @@ defmodule Escipion.Telegram.Client.PollingAgent do
             |> Escipion.Telegram.UpdateProcessor.process_updates()
 
           t2 = DateTime.utc_now() |> DateTime.to_unix(:millisecond)
-          delta = max(0, time - (t2-t1))
+          delta = max(0, time - (t2 - t1))
           :timer.sleep(delta)
-          new_offset && (new_offset + 1) || offset
+          (new_offset && new_offset + 1) || offset
       end
 
     poll_loop(new_offset)

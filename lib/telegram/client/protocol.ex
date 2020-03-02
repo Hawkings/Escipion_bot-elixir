@@ -1,3 +1,4 @@
+# @moduledoc "asdf"
 defmodule Escipion.Telegram.Client.Protocol do
   require Logger
 
@@ -37,12 +38,14 @@ defmodule Escipion.Telegram.Client.Protocol do
       timeout: 45
     }
 
-    response = HTTPoison.post!(
-      "#{@api_base}/bot#{bot_key()}/getUpdates",
-      Poison.encode!(body),
-      [{"Content-Type", "application/json"}],
-      [recv_timeout: 50_000]
-    )
+    response =
+      HTTPoison.post!(
+        "#{@api_base}/bot#{bot_key()}/getUpdates",
+        Poison.encode!(body),
+        [{"Content-Type", "application/json"}],
+        recv_timeout: 50_000
+      )
+
     Poison.decode!(response.body, %{keys: :atoms})
   end
 end

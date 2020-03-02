@@ -4,7 +4,6 @@ defmodule Escipion.Features.Echo do
   end
 
   def run(_) do
-
   end
 
   defp do_echo(%{chat: %{id: chat_id}, text: msg}) do
@@ -12,6 +11,5 @@ defmodule Escipion.Features.Echo do
   end
 
   defp do_echo(_) do
-
   end
 end

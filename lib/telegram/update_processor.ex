@@ -1,5 +1,4 @@
 defmodule Escipion.Telegram.UpdateProcessor do
-
   @spec process_updates(%{result: []}) :: nil
   def process_updates(%{result: []}) do
     nil
