@@ -16,7 +16,7 @@ defmodule Escipion.MixProject do
   def application do
     [
       extra_applications: [:logger],
-      mod: {Escipion.Application, []},
+      mod: {Escipion.Application, []}
     ]
   end
 
