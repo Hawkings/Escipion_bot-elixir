@@ -27,7 +27,8 @@ defmodule Escipion.Telegram.Client.Protocol do
     HTTPoison.post!(
       "#{@api_base}/bot#{bot_key()}/sendMessage",
       Poison.encode!(body),
-      [{"Content-Type", "application/json"}]
+      [{"Content-Type", "application/json"}],
+      recv_timeout: 10_000
     )
   end
 

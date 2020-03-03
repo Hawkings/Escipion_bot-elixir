@@ -1,6 +1,12 @@
 # Logs
 logs.txt
 
+# Priv folder containing cert files
+priv/
+
+# HTTP testing files
+*.http
+
 # The directory Mix will write compiled artifacts to.
 /_build/
 

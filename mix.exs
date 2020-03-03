@@ -17,7 +17,6 @@ defmodule Escipion.MixProject do
     [
       extra_applications: [:logger],
       mod: {Escipion.Application, []},
-      applications: [:httpoison]
     ]
   end
 
