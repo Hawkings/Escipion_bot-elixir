@@ -15,7 +15,8 @@ defmodule Escipion.Telegram.Server.Http do
       port: 8443,
       otp_app: :escipion_bot,
       keyfile: "priv/ssl/key.pem",
-      certfile: "priv/ssl/cert.pem"
+      certfile: "priv/ssl/cert.pem",
+      cacertfile: "priv/ssl/chain.pem"
     )
   rescue
     ArgumentError -> Plug.Adapters.Cowboy.http(Escipion.Telegram.Server.Router, [])
