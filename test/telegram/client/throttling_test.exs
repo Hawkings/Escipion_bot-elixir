@@ -3,15 +3,12 @@ defmodule ThrottlingTest do
   Tests for the Throttling class
   """
   use ExUnit.Case
-  alias Escipion.Telegram.Client.Throttling, as: Throttling
+  alias Escipion.Throttling, as: Throttling
 
   test "sends message after timeout" do
-    {:ok, pid} = GenServer.start_link(Throttling, %{
-      timeout: 1,
-      callback: fn item -> IO.puts(item) end,
-    })
-    GenServer.cast(pid, {:push, "asdf"})
-    GenServer.cast(pid, :pop)
-    :timer.sleep 101
+    throttler = Throttling.init!(1)
+    :ok = Throttling.throttle(throttler, fn -> IO.puts("test") end)
+
+    :timer.sleep(101)
   end
 end

@@ -13,7 +13,7 @@ defmodule Escipion.Telegram.Server.Router do
   plug(:dispatch)
 
   post "/#{Application.get_env(:escipion_bot, :secret_path)}" do
-    UpdateProcessor.process_updates(conn.body_params)
+    UpdateProcessor.process_update(conn.body_params)
     send_resp(conn, 200, "")
   end
 

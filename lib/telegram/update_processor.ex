@@ -13,7 +13,7 @@ defmodule Escipion.Telegram.UpdateProcessor do
     |> Enum.max()
   end
 
-  defp process_update(update) do
+  def process_update(update) do
     # TODO: run all features
     Echo.run(update)
     update.update_id
