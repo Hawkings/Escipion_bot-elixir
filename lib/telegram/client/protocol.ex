@@ -1,5 +1,8 @@
-# @moduledoc "asdf"
+
 defmodule Escipion.Telegram.Client.Protocol do
+  @moduledoc """
+  Client for sending messages to the Telegram API
+  """
   require Logger
 
   @api_base "https://api.telegram.org"
