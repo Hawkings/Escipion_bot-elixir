@@ -7,8 +7,7 @@ defmodule Escipion.Throttling.GenServer do
 
   @type state :: %{
     queue: :queue.queue(any),
-    timeout: integer,
-    callback: (any -> any)
+    timeout: integer
   }
 
   @impl true
