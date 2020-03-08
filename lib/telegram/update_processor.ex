@@ -1,5 +1,6 @@
 defmodule Escipion.Telegram.UpdateProcessor do
   alias Escipion.Features.Echo
+  alias Escipion.Features.Welcome
 
   @spec process_updates(%{result: []}) :: nil
   def process_updates(%{result: []}) do
@@ -15,6 +16,7 @@ defmodule Escipion.Telegram.UpdateProcessor do
 
   def process_update(update) do
     # TODO: run all features
+    Welcome.run(update)
     Echo.run(update)
     update.update_id
   end

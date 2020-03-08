@@ -7,6 +7,9 @@ priv/
 # HTTP testing files
 *.http
 
+# Mnesia folders
+Mnesia.*/
+
 # The directory Mix will write compiled artifacts to.
 /_build/
 

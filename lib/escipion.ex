@@ -1,7 +1,9 @@
 defmodule Escipion.Application do
   use Application
+  alias Escipion.Dal.Repo
 
   def start(_type, _args) do
+    Repo.init!()
     HTTPoison.start()
     Supervisor.start_link(children(), opts())
   end
