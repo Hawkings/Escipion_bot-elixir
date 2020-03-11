@@ -12,10 +12,8 @@ defmodule Escipion.Features.Echo do
   defp do_echo(%{
     chat: %{id: chat_id},
     text: msg,
-    from: %{id: user_id}
   }) do
-    count = Repo.increase_message_count(user_id)
-    Telegram.send_message(chat_id, "#{count}: #{msg}")
+    Telegram.send_message(chat_id, "#{msg}")
   end
 
   defp do_echo(_) do

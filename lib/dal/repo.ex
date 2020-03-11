@@ -7,38 +7,35 @@ defmodule Escipion.Dal.Repo do
     Mnesia.create_schema([node()])
     Mnesia.start()
 
-    case Mnesia.create_table(@db, attributes: [:id, :name, :msg_count], disc_copies: [node()]) do
+    case Mnesia.create_table(@db, attributes: [:id, :user], disc_copies: [node()]) do
       {:atomic, :ok} -> nil
       {:aborted, {:already_exists, _}} -> nil
       {:aborted, reason} -> raise inspect(reason)
     end
   end
 
-  def new_user?(user_id) do
-    case Mnesia.dirty_read({@db, user_id}) do
+  def new_user?(pk) do
+    case Mnesia.dirty_read({@db, pk}) do
       [] -> true
       _ -> false
     end
   end
 
-  def create_user(user_id, name) do
-    Mnesia.dirty_write({@db, user_id, name, 0})
+  def create_user(pk = {user_id, chat_id}, name) do
+    Mnesia.dirty_write({@db, pk, %User{user_id: user_id, chat_id: chat_id, name: name, pole_score: 0}})
   end
 
-  @spec increase_message_count(integer) :: integer
-  def increase_message_count(user_id) do
+  def pole(pk, pos) do
     tx = fn ->
-      [user] = Mnesia.wread({@db, user_id})
-      count = User.get_msg_count(user)
+      [{_, _, user}] = Mnesia.wread({@db, pk})
 
-      user
-      |> User.set_msg_count(count + 1)
-      |> Mnesia.write()
+      new_user = user |> User.increase_pole_score(pos)
+      Mnesia.write({@db, pk, new_user})
 
-      count
+      new_user.pole_score
     end
 
-    {:atomic, count} = Mnesia.transaction(tx)
-    count + 1
+    {:atomic, pole_score} = Mnesia.transaction(tx)
+    pole_score
   end
 end

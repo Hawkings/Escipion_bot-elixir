@@ -1,11 +1,19 @@
 defmodule Escipion.Dal.User do
   alias Escipion.Dal.User
 
-  def set_msg_count({User, user_id, name, _}, count) do
-    {User, user_id, name, count}
+  defstruct [:user_id, :chat_id, :name, :pole_score]
+
+  defguard is_pole_position(pos) when 3 >= pos and pos >= 1
+
+  defp position_to_score(pos) when is_pole_position(pos) do
+    7 - pos * 2
   end
 
-  def get_msg_count({User, _, _, count}) do
-    count
+  defp position_to_score(_) do
+    0
+  end
+
+  def increase_pole_score(u = %User{pole_score: p}, pos) do
+    %User{u | pole_score: p + position_to_score(pos)}
   end
 end
