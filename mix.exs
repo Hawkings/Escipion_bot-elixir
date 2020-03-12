@@ -30,7 +30,8 @@ defmodule Escipion.MixProject do
       {:httpoison, "~> 1.6"},
       {:logger_file_backend, "~> 0.0.11"},
       {:credo, "~> 1.2", only: [:dev, :test], runtime: false},
-      {:excoveralls, "~> 0.12"}
+      {:excoveralls, "~> 0.12"},
+      {:quantum, "~> 3.0-rc"}
     ]
   end
 end

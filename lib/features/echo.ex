@@ -1,5 +1,4 @@
 defmodule Escipion.Features.Echo do
-  alias Escipion.Dal.Repo
   alias Escipion.Telegram.Client.Protocol, as: Telegram
 
   def run(%{message: msg}) do

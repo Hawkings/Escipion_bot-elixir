@@ -11,7 +11,8 @@ defmodule Escipion.Application do
   defp children do
     [
       Escipion.Telegram.Server.Http,
-      Escipion.Telegram.Client.PollingAgent
+      Escipion.Telegram.Client.PollingAgent,
+      Escipion.Cron.Scheduler
     ]
   end
 
